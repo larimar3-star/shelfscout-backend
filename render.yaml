@@ -1,0 +1,33 @@
+# ═══════════════════════════════════════════════════════════════
+# Render.com deployment config
+# This file tells Render exactly how to deploy the server.
+# ═══════════════════════════════════════════════════════════════
+
+services:
+  - type: web
+    name: shelfscout-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+
+    # Environment variables — fill these in on Render dashboard
+    # Go to: Dashboard → shelfscout-backend → Environment
+    envVars:
+      - key: PA_ACCESS_KEY
+        sync: false          # You enter this manually in Render dashboard
+      - key: PA_SECRET_KEY
+        sync: false          # You enter this manually in Render dashboard
+      - key: PA_PARTNER_TAG
+        sync: false          # e.g. yourstore-20
+      - key: PA_REGION
+        value: us-east-1
+      - key: PA_HOST
+        value: webservices.amazon.com
+      - key: KEEPA_KEY
+        sync: false          # Optional — leave blank to skip
+      - key: ALLOWED_ORIGIN
+        value: "*"           # Change to your ShelfScout URL for security
+      - key: NODE_ENV
+        value: production
